@@ -5,14 +5,15 @@ using namespace std;
 int main()
 {
     std::cout << "Hello World!\n";
-  Logger* gg = Logger::GetInstance();
- // cout << gg;
-//  operator << (*gg, "hi");
+  Logger* log = Logger::GetInstance();
+  log->setOutputFormat(true);//to consoule
+  log->setLoggerType(INFO);
+  *log<< "---hi it's sabah "<<"tett";
 
-  //*gg << "hi";
 
 
-    //cout<< gg << "hi" ;
+
+ 
 
 }
 

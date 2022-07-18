@@ -144,6 +144,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Logger-Task.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="output.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
