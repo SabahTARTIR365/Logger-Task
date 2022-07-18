@@ -7,6 +7,7 @@ enum Typelog {
 	DEBUG,
 	INFO,
 	WARN,
+	SILENT,
 	ERROR
 };
 
@@ -28,12 +29,12 @@ public:
   void setOutputFormat(bool isCommanded);
   bool getOutputFormat();
   bool addToFile(string FileName, string Value);
-
+  string getLableType();
 
 	template <typename T>
 	friend Logger& operator <<(Logger& log, T const& value)// unable to write in cpp file
 	{
-		if (isCommanded) cout << value;
+		if (isCommanded) cout << value;//<<"["<< getLableType()<<"] \n";
 		//addToFile("output.txt", value);//ask for this illegal call for non-static memeber
 		return log;
 	}
