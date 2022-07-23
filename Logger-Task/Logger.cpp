@@ -1,13 +1,13 @@
 #include "Logger.h"
 #include <fstream>
 #include <unordered_map>
-Logger* Logger::InstanceLogger = 0;
+ Logger* Logger::InstanceLogger = 0;
  bool Logger::_isConsoleOutput =true;
  bool Logger::_isFileOutput = true;
  Typelog  Logger::messageType = DEBUG;
  Typelog Logger::Level= DEBUG;
+ unordered_map <Typelog, string> Logger::Label;
 
-// template Logger& operator << (Logger& log, const string const value);
  template Logger& operator << (Logger& log, int const value);
  template Logger& operator << (Logger& log, double const value);
  template Logger& operator << (Logger& log,  const char * const value);
@@ -22,20 +22,9 @@ Logger* Logger::InstanceLogger = 0;
 	 return Logger::messageType;
  }
  string Logger::getMessageLable()
- {
-	 string label;
-	
-	 switch (messageType) {
-	 case DEBUG: label = "[DEBUG] "; break;
-	 case INFO:  label = "[INFO] "; break;
-	 case WARN:  label = "[WARN] "; break;
-	 case ERROR: label = "[ERROR] "; break;
-	 case SILENT: label = "[SILENT] "; break;
-
-	 }
-	 return label;
-
-	 return string();
+ {  
+	// InstanceLogger->setMessageLabel();
+	 return Logger::Label[messageType];
  }
 
  void Logger::setLoggerLevel(Typelog type)
@@ -46,9 +35,9 @@ Logger* Logger::InstanceLogger = 0;
  Logger* Logger::GetInstance()
 {
 
-	return (!InstanceLogger) ?
-		InstanceLogger = new Logger() :
-		InstanceLogger;
+	 return (!InstanceLogger) ? 
+		 InstanceLogger = new Logger()  : 
+		 InstanceLogger;
 }
 
 void Logger::setConsoleFormatOutput(bool  isConsoled)
@@ -93,10 +82,8 @@ bool Logger::IsFileOutput() {
 }
 template <typename T> Logger&  operator<< (Logger& log, T const value)
 {
-
 	if (log.IsConsoleOutput())
 	{      
-
 		if (Logger::Level <= log.getMessageType())
 		{
 			cout << log.getMessageLable(); 
@@ -109,28 +96,31 @@ template <typename T> Logger&  operator<< (Logger& log, T const value)
 
 Logger* Logger::depug()
 {  
-	if (Level <= DEBUG) { Logger::setMessageType(DEBUG);  }
+	Logger::Label[DEBUG] = "[DEBUG] ";
 	Logger::setMessageType(DEBUG);
 	return InstanceLogger;
 }
 Logger* Logger:: info()
 {
-	
+	Logger::Label[INFO] = "[INFO] ";
 	Logger::setMessageType(INFO);
 	return InstanceLogger;
 }
 Logger* Logger::warn()
 {
+	Logger::Label[WARN] = "[WARN] ";
 	Logger::setMessageType(WARN);
 	return InstanceLogger;
 }
 Logger* Logger::error()
 {
+	Logger::Label[ERROR] = "[ERROR] ";
 	Logger::setMessageType(ERROR);
 	return InstanceLogger;
 }
 Logger* Logger::silent()
 {
+	Logger::Label[SILENT] = "[SILENT] ";
 	Logger::setMessageType(SILENT); 
 	return InstanceLogger;
 }

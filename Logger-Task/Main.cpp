@@ -10,7 +10,7 @@ int main()
   Logger* log = Logger::GetInstance();
  log->setConsoleFormatOutput(true);//to consoule
  log->setFileFormatOutput(true);
- log->setLoggerLevel(WARN);
+ log->setLoggerLevel(DEBUG);
 
  *log->error() << "ERROR COULDhappen heree ";
  *log->warn() << "WARNING message";

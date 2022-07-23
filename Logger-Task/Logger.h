@@ -17,7 +17,6 @@ class Logger
 	static stringstream data;
 private:
 	static Logger* InstanceLogger;
-	string msglevel = "";
 	Logger(){}
 	static bool _isConsoleOutput ;
 	static bool _isFileOutput ;
@@ -26,6 +25,7 @@ private:
 
 
 public:
+  static unordered_map<Typelog, string> Label;
   void setLoggerLevel(Typelog type);
   static Logger* GetInstance();
   void setConsoleFormatOutput(bool isConsoled);
