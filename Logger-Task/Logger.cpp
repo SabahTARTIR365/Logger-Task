@@ -24,7 +24,7 @@ Logger* Logger::InstanceLogger = 0;
  string Logger::getMessageLable()
  {
 	 string label;
-	 cout << "message type" << messageType;
+	
 	 switch (messageType) {
 	 case DEBUG: label = "[DEBUG] "; break;
 	 case INFO:  label = "[INFO] "; break;
@@ -58,13 +58,12 @@ void Logger::setConsoleFormatOutput(bool  isConsoled)
 
 void Logger::setFileFormatOutput(bool isFiled)
 {
-	cout << "here I'm in file output";
 	this->_isFileOutput = isFiled;
 }
 
 template <typename T> void Logger::addToFile(string FileName, T Value)
 {  
-	cout << "\ninsideadd to  file\n";
+	
 	ofstream fout(FileName, ios::app);
 	if (Logger::Level <= Logger::getMessageType()) {
 		if (fout.is_open()) {
@@ -97,40 +96,41 @@ template <typename T> Logger&  operator<< (Logger& log, T const value)
 
 	if (log.IsConsoleOutput())
 	{      
-		cout << "\n *********level=" << Logger::Level << "message level" << log.getMessageType()<<"************\n";
+
 		if (Logger::Level <= log.getMessageType())
 		{
-			cout << log.getMessageLable(); //"[" << log.getMessageType() << "] ";
+			cout << log.getMessageLable(); 
 			cout << log.getTime() << value << " \n";
 		}
 	}
-	if (log.IsFileOutput()) {  log.addToFile("output.txt", value); }//ask for this illegal call for non-static memeber
+	if (log.IsFileOutput()) {  log.addToFile("output.txt", value); }
 	return log;
 }
 
 Logger* Logger::depug()
 {  
 	if (Level <= DEBUG) { Logger::setMessageType(DEBUG);  }
+	Logger::setMessageType(DEBUG);
 	return InstanceLogger;
 }
 Logger* Logger:: info()
 {
 	
-	if (Level <= INFO)Logger::setMessageType(INFO);//cout<<"[INFO] ";
+	Logger::setMessageType(INFO);
 	return InstanceLogger;
 }
 Logger* Logger::warn()
 {
-	if (Level <= WARN)Logger::setMessageType(WARN);//cout << "[WARN] ";
+	Logger::setMessageType(WARN);
 	return InstanceLogger;
 }
 Logger* Logger::error()
 {
-	if (Level <= ERROR)Logger::setMessageType(ERROR);//cout << "[ERROR] ";
+	Logger::setMessageType(ERROR);
 	return InstanceLogger;
 }
 Logger* Logger::silent()
 {
-	if (Level <= SILENT)Logger::setMessageType(SILENT); //cout << "[SILENT] ";
+	Logger::setMessageType(SILENT); 
 	return InstanceLogger;
 }

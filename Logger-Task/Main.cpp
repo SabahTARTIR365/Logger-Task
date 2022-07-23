@@ -10,10 +10,12 @@ int main()
   Logger* log = Logger::GetInstance();
  log->setConsoleFormatOutput(true);//to consoule
  log->setFileFormatOutput(true);
-  log->setLoggerLevel(DEBUG);
-  *log->warn() << "WARNING message";
- *log->info()<< "Information message";
-  *log->depug() << "we have some depaging un realistic";
+ log->setLoggerLevel(WARN);
+
+ *log->error() << "ERROR COULDhappen heree ";
+ *log->warn() << "WARNING message";
+ *log->info() << "Information message";
+ *log->depug() << "we have some depaging un realistic";
  
 
 
