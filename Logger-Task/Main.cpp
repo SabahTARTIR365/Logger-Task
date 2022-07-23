@@ -6,13 +6,15 @@ using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+   // std::cout << "Hello World!\n";
   Logger* log = Logger::GetInstance();
  log->setConsoleFormatOutput(true);//to consoule
-  log->setLoggerType(INFO);
-  *log << "hi it' s sabah";
- *log->info()<< "hi it' s sabah";
-
+ log->setFileFormatOutput(true);
+  log->setLoggerLevel(DEBUG);
+  *log->warn() << "WARNING message";
+ *log->info()<< "Information message";
+  *log->depug() << "we have some depaging un realistic";
+ 
 
 
 

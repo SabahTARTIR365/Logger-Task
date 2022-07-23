@@ -3,6 +3,7 @@
 #include <ostream>
 #include <fstream>
 #include <string>
+#include <unordered_map>
 using namespace std;
 enum Typelog {
 	DEBUG,
@@ -20,29 +21,29 @@ private:
 	Logger(){}
 	static bool _isConsoleOutput ;
 	static bool _isFileOutput ;
-	static Typelog type;
+	static Typelog Level;
+	static Typelog messageType;
+
 
 public:
   void setLoggerLevel(Typelog type);
   static Logger* GetInstance();
   void setConsoleFormatOutput(bool isConsoled);
   void setFileFormatOutput(bool isFiled);
+  void setMessageType(Typelog messageType);
+  Typelog getMessageType();
   static bool  IsConsoleOutput();
   static bool IsFileOutput();
-  string getTime();
-  bool addToFile(string FileName, string Value);
+  static string getTime();
+  template <typename T> void addToFile(string FileName,  T Value);
+  static string getMessageLable();
   Logger* info();
   Logger* warn();
   Logger* depug();
   Logger* error();
   Logger* silent();
+template <typename T> friend Logger& operator <<(Logger& log, T const value);
 
-template <typename T> friend Logger& operator <<(Logger& log, T const value);// unable to write in cpp file
-	/*{
-		if (isCommanded) cout << value;//<<"["<< getLableType()<<"] \n";
-		//addToFile("output.txt", value);//ask for this illegal call for non-static memeber
-		return log;
-	}*/
 	
 
 
