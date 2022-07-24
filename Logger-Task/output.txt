@@ -1,0 +1,5 @@
+
+[ERROR] 07/24/22 22:49:12 ERROR COULDhappen heree 
+[WARN] 07/24/22 22:49:12 WARNING message
+[INFO] 07/24/22 22:49:12 Information message
+[DEBUG] 07/24/22 22:49:12 we have some depaging un realistic
